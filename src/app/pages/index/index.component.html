@@ -140,46 +140,46 @@
     <h2 id="movies">Películas</h2>
 
     <h3>MCU: La saga del infinito</h3>
-<div class="movies-container">
-  <div class="track">
-    <div *ngFor="let movie of movies1" class="movie-card">
-      <img [src]="movie.image" [alt]="movie.alt">
-      <div class="card-overlay">
-        <p>{{ movie.title }}</p>
-        <button class="btn-watch">Ver ahora</button>
-        <button class="btn-addfavorites">Agregar a favoritos</button>
-      </div>
+    <div class="movies-container">
+        <div class="track">
+            <div *ngFor="let movie of movies1" class="movie-card">
+                <img [src]="movie.image" [alt]="movie.alt">
+                <div class="card-overlay">
+                    <p>{{ movie.title }}</p>
+                    <button class="btn-watch">Ver ahora</button>
+                    <button class="btn-addfavorites">Agregar a favoritos</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
-<h3>MCU: La saga del Multiverso</h3>
-<div class="movies-container">
-  <div class="track">
-    <div *ngFor="let movie of movies2" class="movie-card">
-      <img [src]="movie.image" [alt]="movie.alt">
-      <div class="card-overlay">
-        <p>{{ movie.title }}</p>
-        <button class="btn-watch">Ver ahora</button>
-        <button class="btn-addfavorites">Agregar a favoritos</button>
-      </div>
+    <h3>MCU: La saga del Multiverso</h3>
+    <div class="movies-container">
+        <div class="track">
+            <div *ngFor="let movie of movies2" class="movie-card">
+                <img [src]="movie.image" [alt]="movie.alt">
+                <div class="card-overlay">
+                    <p>{{ movie.title }}</p>
+                    <button class="btn-watch">Ver ahora</button>
+                    <button class="btn-addfavorites">Agregar a favoritos</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
-<h3>Series</h3>
-<div class="series-container">
-  <div class="track">
-    <div *ngFor="let serie of series" class="series-card">
-      <img [src]="serie.image" [alt]="serie.alt">
-      <div class="card-overlay">
-        <p>{{ serie.title }}</p>
-        <button class="btn-watch">Ver ahora</button>
-        <button class="btn-addfavorites">Agregar a favoritos</button>
-      </div>
+    <h2 id="series">Series</h2>
+    <div class="series-container">
+        <div class="track">
+            <div *ngFor="let serie of series" class="series-card">
+                <img [src]="serie.image" [alt]="serie.alt">
+                <div class="card-overlay">
+                    <p>{{ serie.title }}</p>
+                    <button class="btn-watch">Ver ahora</button>
+                    <button class="btn-addfavorites">Agregar a favoritos</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
     <h2 id="favorites">Mis favoritos</h2>
     <div class="favoritos-container">
@@ -194,6 +194,3 @@
     </div>
 
 </section>
-<footer>
-    <p>&copy; Todos los derechos reservados.</p>
-</footer>

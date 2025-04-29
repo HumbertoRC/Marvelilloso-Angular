@@ -2,7 +2,7 @@
     <div class="login-container">
         <div class="login-card">
             <h2>Iniciar sesión</h2>
-            <form>
+            <form (ngSubmit)="onLogin()" #loginForm="ngForm">
                 <div class="input-group">
                     <label for="email">Correo electrónico</label>
                     <input type="email" id="email" [(ngModel)]="email" name="email" placeholder="Ingresa tu correo">
@@ -12,7 +12,7 @@
                     <input type="password" id="password" [(ngModel)]="password" name="password"
                         placeholder="Ingresa tu contraseña">
                 </div>
-                <button class="btn-login" (click)="onLogin()">Iniciar Sesión</button>
+                <button type="submit" class="btn-login">Iniciar Sesión</button>
             </form>
             <div class="links">
                 <a href="#">¿Olvidaste tu contraseña?</a><br>
