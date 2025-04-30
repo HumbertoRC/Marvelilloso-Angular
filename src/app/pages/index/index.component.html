@@ -141,56 +141,93 @@
 
     <h3>MCU: La saga del infinito</h3>
     <div class="movies-container">
-        <div class="track">
+        <div class="track" #movies1Track>
             <div *ngFor="let movie of movies1" class="movie-card">
                 <img [src]="movie.image" [alt]="movie.alt">
                 <div class="card-overlay">
                     <p>{{ movie.title }}</p>
                     <button class="btn-watch">Ver ahora</button>
-                    <button class="btn-addfavorites">Agregar a favoritos</button>
+                    <button class="btn-addfavorites" [ngClass]="{'eliminar': isFavorite(movie)}"
+                        (click)="toggleFavorite(movie)">
+                        {{ isFavorite(movie) ? 'Eliminar de favoritos' : 'Agregar a favoritos' }}
+                    </button>
                 </div>
             </div>
         </div>
+        <div class="scroll-controls">
+            <button class="scroll-btn left" (click)="scrollLeft(movies1Track)">&#8249;</button>
+            <button class="scroll-btn right" (click)="scrollRight(movies1Track)">&#8250;</button>
+        </div>
     </div>
+
 
     <h3>MCU: La saga del Multiverso</h3>
     <div class="movies-container">
-        <div class="track">
+        <div class="track" #movies2Track>
             <div *ngFor="let movie of movies2" class="movie-card">
                 <img [src]="movie.image" [alt]="movie.alt">
                 <div class="card-overlay">
                     <p>{{ movie.title }}</p>
                     <button class="btn-watch">Ver ahora</button>
-                    <button class="btn-addfavorites">Agregar a favoritos</button>
+                    <button class="btn-addfavorites" [ngClass]="{'eliminar': isFavorite(movie)}"
+                        (click)="toggleFavorite(movie)">
+                        {{ isFavorite(movie) ? 'Eliminar de favoritos' : 'Agregar a favoritos' }}
+                    </button>
                 </div>
             </div>
         </div>
+        <div class="scroll-controls">
+            <button class="scroll-btn left" (click)="scrollLeft(movies2Track)">&#8249;</button>
+            <button class="scroll-btn right" (click)="scrollRight(movies2Track)">&#8250;</button>
+        </div>
     </div>
+
 
     <h2 id="series">Series</h2>
     <div class="series-container">
-        <div class="track">
+        <div class="track" #seriesTrack>
             <div *ngFor="let serie of series" class="series-card">
                 <img [src]="serie.image" [alt]="serie.alt">
                 <div class="card-overlay">
                     <p>{{ serie.title }}</p>
                     <button class="btn-watch">Ver ahora</button>
-                    <button class="btn-addfavorites">Agregar a favoritos</button>
+                    <button class="btn-addfavorites" [ngClass]="{'eliminar': isFavorite(serie)}"
+                        (click)="toggleFavorite(serie)">
+                        {{ isFavorite(serie) ? 'Eliminar de favoritos' : 'Agregar a favoritos' }}
+                    </button>
                 </div>
             </div>
         </div>
+        <div class="scroll-controls">
+            <button class="scroll-btn left" (click)="scrollLeft(seriesTrack)">&#8249;</button>
+            <button class="scroll-btn right" (click)="scrollRight(seriesTrack)">&#8250;</button>
+        </div>
     </div>
 
+
     <h2 id="favorites">Mis favoritos</h2>
+    <br>
     <div class="favoritos-container">
         <div class="favoritos">
-            <div class="track" id="favoritos-track">
+            <div class="track" #favoritosTrack>
+                <div *ngFor="let fav of favorites" class="movie-card">
+                    <img [src]="fav.image" [alt]="fav.alt">
+                    <div class="card-overlay">
+                        <p>{{ fav.title }}</p>
+                        <button class="btn-watch">Ver ahora</button>
+                        <button class="btn-addfavorites" [ngClass]="{'eliminar': isFavorite(fav)}"
+                            (click)="toggleFavorite(fav)">
+                            Eliminar de favoritos
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="scroll-controls">
-            <button class="scroll-btn left" data-target="favoritos-track">&#8249;</button>
-            <button class="scroll-btn right" data-target="favoritos-track">&#8250;</button>
+            <button class="scroll-btn left" (click)="scrollLeft(favoritosTrack)">&#8249;</button>
+            <button class="scroll-btn right" (click)="scrollRight(favoritosTrack)">&#8250;</button>
         </div>
     </div>
+
 
 </section>
