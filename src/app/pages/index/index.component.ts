@@ -15,6 +15,7 @@ export class IndexComponent implements OnInit {
   movies2: any[] = [];
   series: any[] = [];
   favorites: any[] = [];
+  
 
   constructor(private movieService: MovieService) {}
 
