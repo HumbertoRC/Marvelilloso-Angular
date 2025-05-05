@@ -10,6 +10,8 @@ import { CommonModule } from '@angular/common';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+
+
 export class RegisterComponent {
   email = '';
   password = '';
@@ -19,25 +21,28 @@ export class RegisterComponent {
   constructor(private router: Router) {}
 
   onRegister(): void {
+    // Verifica que los campos no estén vacíos
     if (!this.email || !this.password) {
       this.errorMessage = 'Completa todos los campos.';
       return;
     }
 
-    // Guardar usuario en localStorage
+    // Obtiene usuarios del localStorage
     const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const userExists = users.some((u: any) => u.email === this.email);
 
+    // Verifica si el usuario ya existe
+    const userExists = users.some((u: any) => u.email === this.email);
     if (userExists) {
       this.errorMessage = 'El usuario ya existe.';
       return;
     }
 
+    // Guarda el nuevo usuario
     users.push({ email: this.email, password: this.password });
     localStorage.setItem('users', JSON.stringify(users));
 
+    // Muestra alerta y redirige al login
     alert('¡Registro exitoso!');
     this.router.navigate(['/']);
   }
 }
-

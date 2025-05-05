@@ -20,3 +20,6 @@ export class MovieService {
     return this.http.get('assets/data/series.json');
   }
 }
+
+
+
