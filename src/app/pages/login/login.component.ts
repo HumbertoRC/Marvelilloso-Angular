@@ -1,45 +1,58 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-// Importa FormsModule para poder usar [(ngModel)] en los formularios
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-login', 
-  standalone: true, // Indica que este componente es independiente (no necesita ser declarado en un módulo)
-  imports: [FormsModule, RouterModule], // Importa los módulos necesarios para el funcionamiento del componente
-  templateUrl: './login.component.html', 
-  styleUrls: ['./login.component.css'] 
+  selector: 'app-login',
+  standalone: true,
+  imports: [FormsModule, RouterModule, CommonModule],
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
+
+ // Variables del formulario
 export class LoginComponent {
-  // Variables que almacenan los datos del formulario y mensajes de error/éxito
-  email = '';             
-  password = '';          
-  errorMessage = ''; 
-  successMessage = '';    
+  email = '';
+  password = '';
+  errorMessage = '';
+  successMessage = '';
 
-  // Constructor que inyecta el servicio Router para realizar navegaciones programáticas
-  constructor(private router: Router) {}
 
-  // Método que se ejecuta al hacer clic en el botón de inicio de sesión
+ // Constructor con inyección de dependencias
+  constructor(private router: Router, private http: HttpClient) { }
+
+
+  // Método que se ejecuta al hacer clic en el botón de login
   onLogin(): void {
-    // Obtiene la lista de usuarios guardada en localStorage, o un array vacío si no hay nada
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-
-    // Busca un usuario cuyo correo y contraseña coincidan con los ingresados
-    const user = users.find((u: any) => u.email === this.email && u.password === this.password);
-
-    // Si no se encuentra un usuario válido, muestra mensaje de error
-    if (!user) {
-      this.errorMessage = 'Correo o contraseña incorrectos.';
-      this.successMessage = ''; // Limpia el mensaje de éxito si lo hubiera
+    if (!this.email || !this.password) {
+      this.errorMessage = 'Completa todos los campos.';
+      this.successMessage = '';
       return;
     }
 
-    // Si el usuario existe, limpia el mensaje de error y muestra el de éxito
-    this.errorMessage = '';
-    this.successMessage = 'Inicio de sesión exitoso.';
+    const data = {
+      email: this.email,
+      password: this.password
+    };
 
-    // Redirige al usuario a la ruta "/dashboard"
-    this.router.navigate(['/dashboard']);
+     // Envío de solicitud POST al backend para hacer login
+    this.http.post<any>('http://localhost:5156/api/auth/login', data).subscribe({
+      next: (res) => {
+        this.successMessage = res.message || '¡Login exitoso!';
+        this.errorMessage = '';
+        
+        // Redirige al usuario a la ruta /dashboard después de 1 segundo
+        setTimeout(() => {
+          this.router.navigate(['/dashboard']);
+        }, 1000);
+      },
+      error: (err) => {
+        this.errorMessage = err.error?.message || 'Correo o contraseña incorrectos.';
+        this.successMessage = '';
+      }
+
+    });
   }
 }

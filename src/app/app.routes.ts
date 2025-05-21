@@ -1,14 +1,27 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
-import { IndexComponent } from './pages/index/index.component';
 import { SuscripcionComponent } from './pages/suscripcion/suscripcion.component';
 import { AyudaComponent } from './pages/ayuda/ayuda.component';
-import { RegisterComponent } from './pages/register/register.component';
 
+
+//LAZYLOAD
 export const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'dashboard', component: IndexComponent },
+  {
+    path: '',
+    loadComponent: () =>
+      import('./pages/login/login.component').then(m => m.LoginComponent),
+  },
+  {
+    path: 'dashboard',
+    loadComponent: () =>
+      import('./pages/index/index.component').then(m => m.IndexComponent),
+  },
   { path: 'suscripcion', component: SuscripcionComponent },
   { path: 'ayuda', component: AyudaComponent },
-  { path: 'register', component: RegisterComponent }
+  {
+    path: 'register',
+    loadComponent: () =>
+      import('./pages/register/register.component').then(m => m.RegisterComponent)
+  }
+
+
 ];

@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
+
 
 @Component({
   selector: 'app-register',
@@ -13,36 +16,53 @@ import { CommonModule } from '@angular/common';
 
 
 export class RegisterComponent {
+  name: string = '';
   email = '';
   password = '';
   errorMessage = '';
   successMessage = '';
 
-  constructor(private router: Router) {}
 
+  constructor(private router: Router, private http: HttpClient) { }
   onRegister(): void {
-    // Verifica que los campos no estén vacíos
-    if (!this.email || !this.password) {
+    if (!this.email || !this.password || !this.name) {
       this.errorMessage = 'Completa todos los campos.';
       return;
     }
 
-    // Obtiene usuarios del localStorage
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    const data = {
+      email: this.email,
+      username: this.name,
+      password: this.password
+    };
 
-    // Verifica si el usuario ya existe
-    const userExists = users.some((u: any) => u.email === this.email);
-    if (userExists) {
-      this.errorMessage = 'El usuario ya existe.';
-      return;
-    }
+    this.http.post<any>('http://localhost:5156/api/auth/register', data).subscribe({
+      next: (response) => {
+        this.successMessage = response.message || '¡Registro exitoso!';
+        this.errorMessage = '';
+        setTimeout(() => {
+          this.router.navigate(['/']);
+        }, 1500);
+      },
+      error: (error) => {
+        console.error('Error en el registro:', error);
 
-    // Guarda el nuevo usuario
-    users.push({ email: this.email, password: this.password });
-    localStorage.setItem('users', JSON.stringify(users));
+        if (error.error && typeof error.error === 'object') {
+          this.errorMessage = error.error.message || 'Error inesperado al registrar.';
+        } else {
+          this.errorMessage = 'Error inesperado al registrar.';
+        }
 
-    // Muestra alerta y redirige al login
-    alert('¡Registro exitoso!');
-    this.router.navigate(['/']);
+        this.successMessage = '';
+      }
+    });
   }
+
+
+  showPassword: boolean = false;
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
 }

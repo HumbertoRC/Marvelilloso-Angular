@@ -2,19 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MovieService } from '../../services/movie.service';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   standalone: true,
   selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css'],
-  imports: [CommonModule, RouterModule]
+  imports: [CommonModule, RouterModule, FormsModule]
 })
 export class IndexComponent implements OnInit {
   movies1: any[] = [];     
   movies2: any[] = [];     
   series: any[] = [];     
-  favorites: any[] = [];   
+  favorites: any[] = [];
+
+  searchText: string = '';  //Variable para guardar texto de búsqueda
 
   constructor(private movieService: MovieService) {}
 
@@ -23,6 +26,15 @@ export class IndexComponent implements OnInit {
     this.movieService.getMovies1().subscribe((data: any) => this.movies1 = data.movies);
     this.movieService.getMovies2().subscribe((data: any) => this.movies2 = data.movies);
     this.movieService.getSeries().subscribe((data: any) => this.series = data.series);
+  }
+
+  // Filtra una lista según searchText (busca coincidencias en el título, ignorando mayúsculas)
+  filterItems(items: any[]): any[] {
+    if (!this.searchText) {
+      return items;
+    }
+    const text = this.searchText.toLowerCase();
+    return items.filter(item => item.title.toLowerCase().includes(text));
   }
 
   // Verifica si un ítem está en favoritos
@@ -40,15 +52,20 @@ export class IndexComponent implements OnInit {
     }
   }
 
-  // Desplaza el carrusel hacia la izquierda
+  
   scrollLeft(track: HTMLElement): void {
     track.scrollBy({ left: -300, behavior: 'smooth' });
   }
 
-  // Desplaza el carrusel hacia la derecha
+
   scrollRight(track: HTMLElement): void {
     track.scrollBy({ left: 300, behavior: 'smooth' });
   }
+
+  public currentSection: 'movies' | 'series' | 'favorites' | 'all' = 'all';
+
+
+  
 }
 
 
