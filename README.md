@@ -18,18 +18,24 @@ Imagenes adicionales:
 ![image](https://github.com/user-attachments/assets/70a88e69-42d6-414d-b793-7d7b7dec60ff)
 ![image](https://github.com/user-attachments/assets/c39f2d97-a712-4dfe-b462-2fbb8e7891e7)
 
+Usuarios registrados:
+![image](https://github.com/user-attachments/assets/28c7d981-d9da-4e71-af13-0e4ead434123)
+
+
 Pruebas: 
 ![image](https://github.com/user-attachments/assets/44ad3e83-74e6-4153-9019-92eeada240a5)
 
 
-
+Diagrama de la base de datos:
+![Captura de pantalla 2025-05-20 234158](https://github.com/user-attachments/assets/4783424a-6370-4efa-85e9-1159447d4a91)
 
 
 Instrucciones de uso:
 1.- Descargar el repositorio.
-2.- Ubicar el repositorio y ejecutar el codigo de manera local ya que momentaneamente es solo una demo.
-3.- Si las imagenes no llegaran a cargarse verificar correctamente las rutas hacia ellas. Llas rutas se encuentran en la carpeta "src/assets/images/".
-4.- Indagar en la pagina y disfrutar del diseño.
+2.- Ubicar el repositorio y crear una carpeta donde incluyas dentro la carpeta "backend" y aparte la del proyecto "marvelilloso-angular".
+3.- En la consola del editor de texto (VSCode por ejemplo) ubicarse en la carpeta "MarvelillosoApi" y ejecutar el comando "dotnet run" y en otra terminal ubicarse en la carpeta "Marvelilloso-Angular" y ejecutar "ng serve". (Se necesita instalar el SDK de .NET desde Ve a https://dotnet.microsoft.com/download y desde este comando -> dotnet add package Microsoft.Data.SqlClient para poder ejecutar el backend sin problemas).
+4.- Ahora la base de datos guarda a los usuarios y permite el login con las credenciales registradas.
+
 
 
 ¿Como lo hice?
@@ -42,17 +48,17 @@ Lo mas complicado fue agregar la barra de navegacion la cual el diseño no resul
 
 Problemas conocidos:
 1.- La optimización de codigo.
-2.- La disfunción de la barra de busqueda.
+2.- Falta de implementacion de "favoritos" para que cada usuario tenga su propia lista.
 
 
 Retrospectiva:
 ¿Que hice bien?
-Me gustó mucho como hice la barra lateral y la idea de las cards que desplazan horizontalmente.
 El diseño en general me gusta demasiado y las funciones que implemente para el uso de la pagina.
+La implementacion de la base de datos para cada usuario me parece muy acertado para el proyecto.
+Las mejoras visuales y de funcionamiento tal como la barra de busqueda que funciona perfectamente y la funcionalidad de la barra lateral.
 
 ¿Qué no salió bien?
-Los botones de desplazamiento.
-La falta de implementacion de una base de datos mejor, por el momento los usuarios se almacenan en el LocalStorage lo cual no es recomendable (lo hice para la demostracion del proyecto).
+La falta de implementacion de una base de datos mejor, necesidad de que los usuarios tengan su propia seccion de favoritos.
 
 ¿Qué puedo hacer diferente?
 Optimizar el codigo, implementar de una mejor manera el proyecto.
