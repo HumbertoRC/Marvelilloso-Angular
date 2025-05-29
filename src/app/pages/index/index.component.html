@@ -138,16 +138,21 @@
 </section>
 
 <section class="content">
+    <h2>Bienvenido {{ username }}</h2>
 
     <div class="search-container">
         <div class="search-bar">
             <input type="text" placeholder="Buscar..." class="search-input" [(ngModel)]="searchText" />
-            <div class="search-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
-                    <path d="M0 0h24v24H0z" fill="none"></path>
-                    <path
-                        d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
-                    </path>
+            <div class="delete-icon" (click)="searchText = ''">
+                <svg fill="#000000" width="64px" height="64px" viewBox="0 0 32 32" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path
+                            d="M19.587 16.001l6.096 6.096c0.396 0.396 0.396 1.039 0 1.435l-2.151 2.151c-0.396 0.396-1.038 0.396-1.435 0l-6.097-6.096-6.097 6.096c-0.396 0.396-1.038 0.396-1.434 0l-2.152-2.151c-0.396-0.396-0.396-1.038 0-1.435l6.097-6.096-6.097-6.097c-0.396-0.396-0.396-1.039 0-1.435l2.153-2.151c0.396-0.396 1.038-0.396 1.434 0l6.096 6.097 6.097-6.097c0.396-0.396 1.038-0.396 1.435 0l2.151 2.152c0.396 0.396 0.396 1.038 0 1.435l-6.096 6.096z">
+                        </path>
+                    </g>
                 </svg>
             </div>
         </div>
@@ -232,7 +237,7 @@
         <div class="favoritos-container">
             <div class="favoritos">
                 <div class="track" #favoritosTrack>
-                    <div *ngFor="let fav of favorites" class="movie-card">
+                    <div *ngFor="let fav of filterItems(favorites)" class="movie-card">
                         <img [src]="fav.image" [alt]="fav.alt">
                         <div class="card-overlay">
                             <p>{{ fav.title }}</p>

@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./login.component.css']
 })
 
- // Variables del formulario
+// Variables del formulario
 export class LoginComponent {
   email = '';
   password = '';
@@ -20,8 +22,8 @@ export class LoginComponent {
   successMessage = '';
 
 
- // Constructor con inyección de dependencias
-  constructor(private router: Router, private http: HttpClient) { }
+  // Constructor con inyección de dependencias
+  constructor(private router: Router, private http: HttpClient, private authService: AuthService) { }
 
 
   // Método que se ejecuta al hacer clic en el botón de login
@@ -37,13 +39,12 @@ export class LoginComponent {
       password: this.password
     };
 
-     // Envío de solicitud POST al backend para hacer login
-    this.http.post<any>('http://localhost:5156/api/auth/login', data).subscribe({
+    // Envío de solicitud POST al backend para hacer login
+    this.authService.login(this.email, this.password).subscribe({
       next: (res) => {
         this.successMessage = res.message || '¡Login exitoso!';
         this.errorMessage = '';
-        
-        // Redirige al usuario a la ruta /dashboard después de 1 segundo
+
         setTimeout(() => {
           this.router.navigate(['/dashboard']);
         }, 1000);
@@ -52,7 +53,7 @@ export class LoginComponent {
         this.errorMessage = err.error?.message || 'Correo o contraseña incorrectos.';
         this.successMessage = '';
       }
-
     });
+
   }
 }

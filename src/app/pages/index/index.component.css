@@ -37,7 +37,7 @@ body {
   color: #aaa;
 }
 
-.search-icon {
+.delete-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -49,13 +49,13 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.search-icon svg {
+.delete-icon svg {
   fill: #fff;
   width: 20px;
   height: 20px;
 }
 
-.search-icon:hover {
+.delete-icon:hover {
   background-color: #555;
 }
 
